@@ -16,6 +16,25 @@ const hasEducation = siteConfig.education && siteConfig.education.length > 0;
               class="w-[75px] h-[5px] mt-2 rounded-full"
               style={`background-color: ${siteConfig.accentColor}`}
             />
+            
+            {/* University Logos */}
+            <div class="mt-8 lg:mt-12 flex flex-wrap gap-4">
+              {siteConfig.education.map((edu) => (
+                edu.logo && (
+                  <div class="w-16 h-16 rounded-full bg-white shadow-md flex items-center justify-center overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                    <img
+                      src={edu.logo}
+                      alt={`${edu.school} logo`}
+                      class={`${
+                        edu.school === 'Indian Institute of Technology (IIT) Dhanbad'
+                          ? 'w-4/5 h-4/5'
+                          : 'w-full h-full'
+                      } object-contain`}
+                    />
+                  </div>
+                )
+              ))}
+            </div>
           </div>
 
           <div class="lg:col-span-8">
@@ -23,16 +42,25 @@ const hasEducation = siteConfig.education && siteConfig.education.length > 0;
               {siteConfig.education.map((edu) => (
                 <div class="bg-white/80 backdrop-blur-sm rounded-lg shadow-sm border border-gray-100 p-4 sm:p-5 md:p-6 hover:shadow-md transition-shadow duration-300">
                   <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4">
-                    <div>
-                      <h3 class="text-lg sm:text-xl font-semibold text-gray-900">
-                        {edu.degree}
-                      </h3>
-                      <p
-                        class="text-base sm:text-lg"
-                        style={`color: ${siteConfig.accentColor}`}
-                      >
-                        {edu.school}
-                      </p>
+                    <div class="flex items-center space-x-3">
+                      {edu.logo && (
+                        <img
+                          src={edu.logo}
+                          alt={`${edu.school} logo`}
+                          class="w-12 h-12 object-contain flex-shrink-0"
+                        />
+                      )}
+                      <div>
+                        <h3 class="text-lg sm:text-xl font-semibold text-gray-900">
+                          {edu.degree}
+                        </h3>
+                        <p
+                          class="text-base sm:text-lg"
+                          style={`color: ${siteConfig.accentColor}`}
+                        >
+                          {edu.school}
+                        </p>
+                      </div>
                     </div>
                     <div class="text-right mt-2 sm:mt-0">
                       <span class="text-xs sm:text-sm text-gray-500 block">

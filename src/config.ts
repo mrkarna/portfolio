@@ -45,7 +45,7 @@ export const siteConfig = {
       logo: "/nvidia-logo.png", // Add NVIDIA logo
       bullets: [
         "Building a highly available, low-latency payment platform that powers billing, subscription management, and usage-based metering for a wide range of NVIDIA services",
-        "Working with Go, DynamoDB, and AWS technologies in Santa Clara, CA",
+        "Technologies: Go, DynamoDB, AWS",
       ],
     },
     {
@@ -115,6 +115,7 @@ export const siteConfig = {
       degree: "Master of Science in Computer Science",
       dateRange: "Aug 2023 - May 2025",
       location: "Massachusetts, USA",
+      logo: "/umass-logo.png", // Add UMass logo
       achievements: [
         "GPA: 4.0/4.0",
         "Coursework: Distributed Computing, Information Retrieval, Distributed and Operating Systems, Computer Networks, Machine Learning, Advance Natural Language Processing, Advance Algorithms, Applied Statistics",
@@ -125,6 +126,7 @@ export const siteConfig = {
       degree: "Bachelor of Technology in Computer Science & Engineering",
       dateRange: "July 2016 - May 2020",
       location: "Dhanbad, India",
+      logo: "/iit-dhanbad-logo.png", // Add IIT Dhanbad logo
       achievements: [
         "GPA: 9.1/10",
         "Coursework: Algorithms, Data Structures, Operating Systems, Database Management, Data Mining, Software Engineering",
