@@ -3,8 +3,8 @@ export const siteConfig = {
   title: "Software Engineer",
   description: "Portfolio website of Manish Ranjan Karna - Software Engineer at NVIDIA",
   accentColor: "#1d4ed8",
-  profileImage: "/profile.jpeg", // Profile photo for About section
-  backgroundImage: "/image.png", // Background image for landing page
+  profileImage: "profile.jpeg", // Profile photo for About section
+  backgroundImage: "image.png", // Background image for landing page
   social: {
     email: "manish99.ranjan99@gmail.com",
     linkedin: "https://linkedin.com/in/mrkarna",
@@ -42,7 +42,7 @@ export const siteConfig = {
       title: "Software Engineer",
       dateRange: "June 2025 - Present",
       location: "Santa Clara, CA, USA",
-      logo: "/nvidia-logo.png", // Add NVIDIA logo
+      logo: "nvidia-logo.png", // Add NVIDIA logo
       bullets: [
         "Building a highly available, low-latency payment platform that powers billing, subscription management, and usage-based metering for a wide range of NVIDIA services",
         "Technologies: Go, DynamoDB, AWS",
@@ -53,7 +53,7 @@ export const siteConfig = {
       title: "Systems Development Engineer Co-op",
       dateRange: "Sep 2024 - Dec 2024",
       location: "Boston, MA, USA",
-      logo: "/amazon-logo.png", // Add Amazon logo
+      logo: "amazon-logo.png", // Add Amazon logo
       bullets: [
         "Designed and developed AREdgeDiags, a troubleshooting tool for Amazon Robotics that parses logs, identifies root causes with state machines, and reduces downtime and team dependency",
         "The tool enabled local IT and ARTS teams to resolve issues independently, cutting escalations by 50% and reducing delays",
@@ -65,7 +65,7 @@ export const siteConfig = {
       title: "Cloud Platform Engineering Intern",
       dateRange: "May 2024 - Aug 2024",
       location: "Santa Clara, CA, USA",
-      logo: "/nvidia-logo.png", // Add NVIDIA logo
+      logo: "nvidia-logo.png", // Add NVIDIA logo
       bullets: [
         "Designed and developed a high-performance Java library for publishing metering events, featuring retry logic, batching, and buffering capabilities, and demonstrated its scalability and reliability through load testing with 10,000 events per second",
         "Developed a Go-based microservice integrating with Metronome to manage billable metrics for Nvidia cloud services, ensuring SOX compliance through auditable tracking, and automating processes to reduce manual intervention by over 80%",
@@ -77,7 +77,7 @@ export const siteConfig = {
       title: "Software Engineer",
       dateRange: "Nov 2022 - Aug 2023",
       location: "Pune, India",
-      logo: "/zeni-logo.png", // Add Zeni logo
+      logo: "zeni-logo.png", // Add Zeni logo
       bullets: [
         "Developed a reporting framework to generate accounting reports by integrating with QuickBooks (by Intuit) to fetch client's transactions, ensuring real-time updates of reports that previously lagged by up to 12 hours",
         "Optimized cron jobs for data synchronization with QuickBooks, reducing the synchronization time from 6 hours to 2 hours by minimizing database calls, search index latency and using batch processing",
@@ -89,7 +89,7 @@ export const siteConfig = {
       title: "Software Development Engineer II",
       dateRange: "May 2022 - Nov 2022",
       location: "Bangalore, India",
-      logo: "/tila-logo.png", // Add Tila Labs logo
+      logo: "tila-logo.png", // Add Tila Labs logo
       bullets: [
         "Implemented a reconciliation dashboard to settle Cash-on-Delivery (COD) payments between the platform and logistic partners on a daily basis, resulting in transparent bookkeeping and an increased cash flow of more than 40%",
         "Integrated the e-commerce platform with a third-party payment gateway to initiate instant refunds for canceled/returned products. Employed AWS SQS to establish robust retry mechanisms for handling potential failure scenarios",
@@ -101,7 +101,7 @@ export const siteConfig = {
       title: "Software Development Engineer I",
       dateRange: "July 2020 - April 2022",
       location: "Bangalore, India",
-      logo: "/flipkart-logo.png", // Add Flipkart logo
+      logo: "flipkart-logo.png", // Add Flipkart logo
       bullets: [
         "Developed REST-based microservices in a Spring Boot project to automate the tracking of the life cycle of products at Flipkart, leading to a remarkable 60% reduction in manual effort. Involved integrating APIs with dependent services",
         "Created an installable Debian package for a customized Azkaban v3 (by LinkedIn) to eliminate single point of failure cases",
@@ -115,7 +115,7 @@ export const siteConfig = {
       degree: "Master of Science in Computer Science",
       dateRange: "Aug 2023 - May 2025",
       location: "Massachusetts, USA",
-      logo: "/umass-logo.png", // Add UMass logo
+      logo: "umass-logo.png", // Add UMass logo
       achievements: [
         "GPA: 4.0/4.0",
         "Coursework: Distributed Computing, Information Retrieval, Distributed and Operating Systems, Computer Networks, Machine Learning, Advance Natural Language Processing, Advance Algorithms, Applied Statistics",
@@ -126,7 +126,7 @@ export const siteConfig = {
       degree: "Bachelor of Technology in Computer Science & Engineering",
       dateRange: "July 2016 - May 2020",
       location: "Dhanbad, India",
-      logo: "/iit-dhanbad-logo.png", // Add IIT Dhanbad logo
+      logo: "iit-dhanbad-logo.png", // Add IIT Dhanbad logo
       achievements: [
         "GPA: 9.1/10",
         "Coursework: Algorithms, Data Structures, Operating Systems, Database Management, Data Mining, Software Engineering",
