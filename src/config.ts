@@ -4,7 +4,7 @@ export const siteConfig = {
   description: "Portfolio website of Manish Ranjan Karna - Software Engineer at NVIDIA",
   accentColor: "#1d4ed8",
   social: {
-    email: "mkarna@umass.edu",
+    email: "manish99.ranjan99@gmail.com",
     linkedin: "https://linkedin.com/in/mrkarna",
     github: "https://github.com/mrkarna",
   },
