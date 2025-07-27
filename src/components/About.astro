@@ -16,6 +16,18 @@ import { siteConfig } from "../config";
           style={`background-color: ${siteConfig.accentColor}`}
         >
         </div>
+        
+        {/* Profile Image */}
+        {siteConfig.profileImage && (
+          <div class="mt-8 lg:mt-12">
+            <img
+              src={siteConfig.profileImage}
+              alt={`${siteConfig.name} - ${siteConfig.title}`}
+              class="w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 rounded-full object-cover shadow-lg"
+              style={`border: 4px solid ${siteConfig.accentColor}20; object-position: center 35%`}
+            />
+          </div>
+        )}
       </div>
 
       <div class="lg:col-span-8 space-y-8">
