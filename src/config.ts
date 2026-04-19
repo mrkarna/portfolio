@@ -4,6 +4,7 @@ export const siteConfig = {
   description: "Portfolio website of Manish Ranjan Karna - Software Engineer at NVIDIA",
   accentColor: "#1d4ed8",
   profileImage: "profile.jpeg", // Profile photo for About section
+  profileImageVerticalAnchorPercent: 32,
   backgroundImage: "image.png", // Background image for landing page
   social: {
     email: "manish99.ranjan99@gmail.com",
@@ -12,7 +13,7 @@ export const siteConfig = {
   },
   aboutMe:
     "I am a Software Engineer at NVIDIA, passionate about building scalable, high-performance systems. With experience in Go, Java, Python, and cloud platforms like AWS and GCP, I specialize in designing microservices and distributed systems. I hold a Master's degree in Computer Science from University of Massachusetts Amherst and have worked at tech giants like Amazon and NVIDIA, among others.",
-  skills: ["Java", "Golang", "Python", "C", "C++", "SQL", "Spring Boot", "Go kit", "MySQL", "Kafka", "MongoDB", "AWS", "GCP", "Docker", "Kubernetes"],
+  skills: ["Golang", "C++", "Java", "Python", "C", "Go kit", "Spring Boot", "Django", "Flask", "DynamoDB", "MongoDB", "MySQL", "Kafka", "AWS", "GCP", "Docker", "Kubernetes"],
   projects: [
     {
       name: "Personalized Large Language Model",
@@ -44,7 +45,8 @@ export const siteConfig = {
       location: "Santa Clara, CA, USA",
       logo: "nvidia-logo.png", // Add NVIDIA logo
       bullets: [
-        "Building a highly available, low-latency payment platform that powers billing, subscription management, and usage-based metering for a wide range of NVIDIA services",
+        "Integrated <strong>PayPal and Stripe</strong> to collect billing across various NVIDIA services — handling <strong>subscriptions, one-time payments, refunds, and usage-based metering</strong> at scale",
+        "Improved <strong>payment reliability and fraud detection by 35%</strong> by introducing <strong>post-payment actions during checkout</strong>, including <strong>trade compliance checks, device fingerprinting, and fraud signal enrichment</strong> on invoices",
         "Technologies: Go, DynamoDB, AWS",
       ],
     },
@@ -55,8 +57,8 @@ export const siteConfig = {
       location: "Boston, MA, USA",
       logo: "amazon-logo.png", // Add Amazon logo
       bullets: [
-        "Designed and developed AREdgeDiags, a troubleshooting tool for Amazon Robotics that parses logs, identifies root causes with state machines, and reduces downtime and team dependency",
-        "The tool enabled local IT and ARTS teams to resolve issues independently, cutting escalations by 50% and reducing delays",
+        "Designed and developed <strong>AREdgeDiags</strong>, a troubleshooting tool for <strong>Amazon Robotics</strong> that parses logs, identifies root causes with <strong>state machines</strong>, and reduces downtime and team dependency",
+        "The tool enabled local IT and ARTS teams to resolve issues independently, <strong>cutting escalations by 50%</strong> and reducing delays",
         "Technologies: Java, Python, DynamoDB, AWS",
       ],
     },
@@ -67,8 +69,8 @@ export const siteConfig = {
       location: "Santa Clara, CA, USA",
       logo: "nvidia-logo.png", // Add NVIDIA logo
       bullets: [
-        "Designed and developed a high-performance Java library for publishing metering events, featuring retry logic, batching, and buffering capabilities, and demonstrated its scalability and reliability through load testing with 10,000 events per second",
-        "Developed a Go-based microservice integrating with Metronome to manage billable metrics for Nvidia cloud services, ensuring SOX compliance through auditable tracking, and automating processes to reduce manual intervention by over 80%",
+        "Designed and developed a <strong>high-performance Java library</strong> for publishing metering events, featuring <strong>retry logic, batching, and buffering</strong>, and demonstrated its scalability and reliability through load testing with <strong>10,000 events per second</strong>",
+        "Developed a <strong>Go-based microservice</strong> integrating with <strong>Metronome</strong> to manage billable metrics for NVIDIA cloud services, ensuring <strong>SOX compliance</strong> through auditable tracking, and <strong>automating processes to reduce manual intervention by over 80%</strong>",
         "Technologies: Java, Go, Spring Boot, DynamoDB, AWS",
       ],
     },
@@ -79,8 +81,8 @@ export const siteConfig = {
       location: "Pune, India",
       logo: "zeni-logo.png", // Add Zeni logo
       bullets: [
-        "Developed a reporting framework to generate accounting reports by integrating with QuickBooks (by Intuit) to fetch client's transactions, ensuring real-time updates of reports that previously lagged by up to 12 hours",
-        "Optimized cron jobs for data synchronization with QuickBooks, reducing the synchronization time from 6 hours to 2 hours by minimizing database calls, search index latency and using batch processing",
+        "Developed a <strong>reporting framework</strong> to generate accounting reports by integrating with <strong>QuickBooks (by Intuit)</strong> to fetch client's transactions, ensuring <strong>real-time updates of reports</strong> that previously lagged by up to 12 hours",
+        "Optimized <strong>cron jobs for data synchronization</strong> with QuickBooks, <strong>reducing the synchronization time from 6 hours to 2 hours</strong> by minimizing database calls, search index latency and using <strong>batch processing</strong>",
         "Technologies: Python, WebApp, Google Cloud Platform",
       ],
     },
@@ -91,8 +93,8 @@ export const siteConfig = {
       location: "Bangalore, India",
       logo: "tila-logo.png", // Add Tila Labs logo
       bullets: [
-        "Implemented a reconciliation dashboard to settle Cash-on-Delivery (COD) payments between the platform and logistic partners on a daily basis, resulting in transparent bookkeeping and an increased cash flow of more than 40%",
-        "Integrated the e-commerce platform with a third-party payment gateway to initiate instant refunds for canceled/returned products. Employed AWS SQS to establish robust retry mechanisms for handling potential failure scenarios",
+        "Implemented a <strong>reconciliation dashboard</strong> to settle <strong>Cash-on-Delivery (COD) payments</strong> between the platform and logistic partners on a daily basis, resulting in transparent bookkeeping and an <strong>increased cash flow of more than 40%</strong>",
+        "Integrated the e-commerce platform with a <strong>third-party payment gateway</strong> to initiate <strong>instant refunds</strong> for canceled/returned products; employed <strong>AWS SQS</strong> to establish robust <strong>retry mechanisms</strong> for handling potential failure scenarios",
         "Technologies: Java, MySQL, Kafka, Spring boot, AWS",
       ],
     },
@@ -103,8 +105,8 @@ export const siteConfig = {
       location: "Bangalore, India",
       logo: "flipkart-logo.png", // Add Flipkart logo
       bullets: [
-        "Developed REST-based microservices in a Spring Boot project to automate the tracking of the life cycle of products at Flipkart, leading to a remarkable 60% reduction in manual effort. Involved integrating APIs with dependent services",
-        "Created an installable Debian package for a customized Azkaban v3 (by LinkedIn) to eliminate single point of failure cases",
+        "Developed <strong>REST-based microservices</strong> in a Spring Boot project to automate the tracking of the life cycle of products at Flipkart, leading to a <strong>60% reduction in manual effort</strong>; integrated APIs with dependent services",
+        "Created an <strong>installable Debian package</strong> for a customized <strong>Azkaban v3 (by LinkedIn)</strong> to <strong>eliminate single point of failure</strong> cases",
         "Technologies: Java, MySQL, MongoDB, ElasticSearch, Dropwizard, Spring boot",
       ],
     },
@@ -117,7 +119,7 @@ export const siteConfig = {
       location: "Massachusetts, USA",
       logo: "umass-logo.png", // Add UMass logo
       achievements: [
-        "GPA: 4.0/4.0",
+        "GPA: 4/4",
         "Coursework: Distributed Computing, Information Retrieval, Distributed and Operating Systems, Computer Networks, Machine Learning, Advance Natural Language Processing, Advance Algorithms, Applied Statistics",
       ],
     },

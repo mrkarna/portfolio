@@ -1,112 +1,205 @@
 ---
 import { siteConfig } from "../config";
 const hasExperience = siteConfig.experience && siteConfig.experience.length > 0;
+
+type Entry = {
+  company: string;
+  title: string;
+  dateRange: string;
+  location?: string;
+  logo?: string;
+  bullets: string[];
+};
+
+const entries = (siteConfig.experience as Entry[]).map((exp, i) => {
+  const techLine = exp.bullets.find((b) => /^technologies?:/i.test(b.trim()));
+  const restBullets = exp.bullets.filter((b) => b !== techLine);
+  const tech = techLine
+    ? techLine
+        .replace(/^technologies?:\s*/i, "")
+        .split(/,\s*/)
+        .map((t) => t.trim())
+        .filter(Boolean)
+    : [];
+  return { ...exp, bullets: restBullets, tech, id: `exp-${i}` };
+});
 ---
 
-{
-  hasExperience && (
-    <section id="experience" class="p-8 sm:p-12 md:p-16 lg:p-24">
-      <div>
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
-          <div class="lg:col-span-4">
-            <h2 class="text-3xl sm:text-4xl md:text-5xl xl:text-7xl font-bold text-gray-900">
-              Experience
-            </h2>
-            <div
-              class="w-[75px] h-[5px] mt-2 rounded-full"
-              style={`background-color: ${siteConfig.accentColor}`}
-            />
-            
-            {/* Company Logos */}
-            <div class="mt-8 lg:mt-12 flex flex-wrap gap-4">
-              {Array.from(new Set(siteConfig.experience.map(exp => exp.company))).map((company) => {
-                const exp = siteConfig.experience.find(e => e.company === company);
-                return exp?.logo && (
-                  <div class="w-16 h-16 rounded-full bg-white shadow-md flex items-center justify-center overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                    <img
-                      src={exp.logo}
-                      alt={`${company} logo`}
-                      class={`${
-                        company === 'NVIDIA' || company === 'Amazon' 
-                          ? 'w-5/5 h-5/5' 
-                          : company === 'Flipkart Internet Pvt. Ltd.'
-                          ? 'w-full h-full scale-115'
-                          : 'w-full h-full'
-                      } object-contain`}
-                    />
-                  </div>
-                );
-              })}
-            </div>
+{hasExperience && (
+  <section id="experience" class="relative py-24 md:py-32 px-6 sm:px-10 md:px-16 lg:px-24">
+    <div class="mx-auto max-w-7xl">
+      <!-- Heading -->
+      <div class="reveal mb-14 max-w-3xl">
+        <p class="text-sm font-mono text-slate-500 tracking-widest uppercase">
+          <span style="color: var(--accent);">02.</span> Where I've worked
+        </p>
+        <h2 class="mt-3 text-3xl sm:text-4xl md:text-5xl font-bold section-title" style="font-family: var(--font-display);">
+          Experience.
+        </h2>
+        <div class="mt-4 h-[3px] w-20 rounded-full accent-bar"></div>
+        <p class="mt-6 text-slate-400 text-base leading-relaxed">
+          Pick a company to read the story.
+        </p>
+      </div>
+
+      <div class="reveal grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10" data-exp-root>
+        <!-- Left rail: company list (desktop) / horizontal scroll (mobile) -->
+        <aside class="lg:col-span-4">
+          <div class="hidden lg:block">
+            <ul class="flex flex-col gap-2" role="tablist" aria-label="Experience list">
+              {entries.map((e, i) => (
+                <li>
+                  <button
+                    type="button"
+                    role="tab"
+                    data-exp-tab={e.id}
+                    aria-selected={i === 0 ? "true" : "false"}
+                    class={`exp-tab w-full flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] p-3 pr-4 text-left transition-all duration-300 ${i === 0 ? "exp-tab-active" : ""}`}
+                  >
+                    {e.logo ? (
+                      <img src={e.logo} alt="" class="h-11 w-11 shrink-0 rounded-full object-cover" />
+                    ) : (
+                      <span class="h-11 w-11 shrink-0 rounded-full flex items-center justify-center text-xs font-bold text-slate-200 bg-white/[0.06]">{e.company[0]}</span>
+                    )}
+                    <span class="min-w-0 flex-1">
+                      <span class="block text-sm font-semibold text-slate-100 truncate">{e.company}</span>
+                      <span class="block text-xs text-slate-400 truncate">{e.title}</span>
+                    </span>
+                    <span class="font-mono text-[10px] text-slate-500 whitespace-nowrap">
+                      {e.dateRange.split(" - ")[0]}
+                    </span>
+                  </button>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          <div class="lg:col-span-8">
-            <div class="relative">
-              {siteConfig.experience.map((exp, index) => (
-                <div class="relative mb-12 last:mb-0">
-                  {/* Timeline dot at top of card */}
-                  <div
-                    class="absolute left-1/2 -top-2 w-4 h-4 bg-white border-2 rounded-full -translate-x-1/2 z-20 transition-all duration-300"
-                    style={`border-color: ${siteConfig.accentColor}; background-color: ${siteConfig.accentColor}`}
-                  />
-
-                  {/* Connecting line below card */}
-                  {index < siteConfig.experience.length - 1 && (
-                    <div class="absolute left-1/2 bottom-0 w-0.5 h-12 bg-gray-300 -translate-x-1/2 translate-y-full z-10" />
-                  )}
-
-                  {/* Experience card */}
-                  <div class="bg-white/80 backdrop-blur-sm rounded-lg shadow-sm border border-gray-100 p-4 sm:p-5 md:p-6 hover:shadow-md transition-shadow duration-300">
-                    <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4">
-                      <div class="flex items-center space-x-3">
-                        {exp.logo && (
-                          <img
-                            src={exp.logo}
-                            alt={`${exp.company} logo`}
-                            class="w-12 h-12 object-contain flex-shrink-0"
-                          />
-                        )}
-                        <div>
-                          <h3 class="text-lg sm:text-xl font-semibold text-gray-900">
-                            {exp.title}
-                          </h3>
-                          <p
-                            class="text-base sm:text-lg"
-                            style={`color: ${siteConfig.accentColor}`}
-                          >
-                            {exp.company}
-                          </p>
-                        </div>
-                      </div>
-                      <div class="text-right mt-2 sm:mt-0">
-                        <span class="text-xs sm:text-sm text-gray-500 block">
-                          {exp.dateRange}
-                        </span>
-                        {exp.location && (
-                          <span class="text-xs sm:text-sm text-gray-500 block mt-1">
-                            {exp.location}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-
-                    <ul class="space-y-2">
-                      {exp.bullets.map((bullet) => (
-                        <li class="flex items-start">
-                          <span class="inline-block w-1.5 h-1.5 rounded-full bg-gray-400 mt-2 mr-3 flex-shrink-0" />
-                          <span class="text-sm sm:text-base text-gray-600">
-                            {bullet}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
+          <!-- Mobile: horizontal pill scroller -->
+          <div class="lg:hidden -mx-6 sm:-mx-10 md:-mx-16 px-6 sm:px-10 md:px-16 overflow-x-auto pb-3 mb-4">
+            <div class="flex gap-2 w-max" role="tablist">
+              {entries.map((e, i) => (
+                <button
+                  type="button"
+                  role="tab"
+                  data-exp-tab={e.id}
+                  aria-selected={i === 0 ? "true" : "false"}
+                  class={`exp-tab flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.02] text-slate-300 px-3 py-2 text-sm whitespace-nowrap transition-all duration-300 ${i === 0 ? "exp-tab-active" : ""}`}
+                >
+                  {e.logo && <img src={e.logo} alt="" class="h-6 w-6 rounded-full object-cover" />}
+                  {e.company}
+                </button>
               ))}
             </div>
           </div>
+        </aside>
+
+        <!-- Detail panel -->
+        <div class="lg:col-span-8 relative min-h-[380px]">
+          {entries.map((e, i) => (
+            <article
+              data-exp-panel={e.id}
+              role="tabpanel"
+              aria-hidden={i === 0 ? "false" : "true"}
+              class={`exp-panel ${i === 0 ? "exp-panel-active" : "hidden"} relative rounded-2xl glass p-6 sm:p-8 overflow-hidden`}
+            >
+              <!-- Watermark logo -->
+              {e.logo && (
+                <img
+                  src={e.logo}
+                  alt=""
+                  aria-hidden="true"
+                  class="pointer-events-none absolute -right-10 -top-10 w-56 opacity-[0.05]"
+                />
+              )}
+
+              <div class="relative">
+                <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
+                  <span class="font-mono text-slate-500">//</span>
+                  <span class="font-mono text-slate-400">{e.dateRange}</span>
+                  {e.location && (
+                    <>
+                      <span class="text-slate-600">·</span>
+                      <span class="inline-flex items-center gap-1 text-slate-400">
+                        <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        {e.location}
+                      </span>
+                    </>
+                  )}
+                </div>
+
+                <h3
+                  class="mt-2 text-xl sm:text-2xl md:text-3xl font-bold text-slate-100 leading-tight tracking-tight"
+                  style="font-family: var(--font-display);"
+                >
+                  {e.title}
+                  <span class="text-slate-500 font-normal"> @ </span>
+                  <span class="text-gradient">{e.company}</span>
+                </h3>
+
+                {e.bullets.length > 0 && (
+                  <ul class="exp-bullets mt-6 space-y-3">
+                    {e.bullets.map((bullet) => (
+                      <li class="flex items-start gap-3 text-sm sm:text-base text-slate-300 leading-relaxed">
+                        <svg class="mt-1.5 h-3 w-3 shrink-0" viewBox="0 0 12 12" fill="none" style="color: var(--accent);">
+                          <path d="M2 6l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span set:html={bullet}></span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+
+                {e.tech.length > 0 && (
+                  <div class="mt-7 pt-6 border-t border-white/5">
+                    <p class="text-xs uppercase tracking-[0.2em] text-slate-500 mb-3">Tech stack</p>
+                    <div class="flex flex-wrap gap-1.5">
+                      {e.tech.map((t) => (
+                        <span class="inline-flex items-center rounded-md bg-white/[0.04] border border-white/10 px-2.5 py-1 text-xs font-mono text-slate-300">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </article>
+          ))}
         </div>
       </div>
-    </section>
-  )
-}
+    </div>
+
+
+    <script is:inline>
+      (function () {
+        const root = document.querySelector("[data-exp-root]");
+        if (!root) return;
+        const tabs = root.querySelectorAll("[data-exp-tab]");
+        const panels = root.querySelectorAll("[data-exp-panel]");
+
+        const activate = (id) => {
+          tabs.forEach((t) => {
+            const on = t.getAttribute("data-exp-tab") === id;
+            t.setAttribute("aria-selected", on ? "true" : "false");
+            t.classList.toggle("exp-tab-active", on);
+            if (!on) {
+              t.classList.remove("exp-tab-active");
+            }
+          });
+          panels.forEach((p) => {
+            const on = p.getAttribute("data-exp-panel") === id;
+            p.classList.toggle("hidden", !on);
+            p.classList.toggle("exp-panel-active", on);
+            p.setAttribute("aria-hidden", on ? "false" : "true");
+          });
+        };
+
+        tabs.forEach((t) => {
+          t.addEventListener("click", () => activate(t.getAttribute("data-exp-tab")));
+        });
+      })();
+    </script>
+  </section>
+)}

@@ -1,52 +1,185 @@
 ---
 import { siteConfig } from "../config";
+
+const skillCategories: { label: string; items: string[] }[] = [
+  { label: "Languages", items: ["Golang", "C++", "Java", "Python", "C"] },
+  { label: "Frameworks", items: ["Go kit", "Spring Boot", "Django", "Flask"] },
+  { label: "Data", items: ["DynamoDB", "MongoDB", "MySQL", "Kafka"] },
+  { label: "Cloud & Infra", items: ["AWS", "GCP", "Docker", "Kubernetes"] },
+];
+
+const devicon = (slug: string) =>
+  `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${slug}.svg`;
+
+const skillIcons: Record<string, string> = {
+  "Java": devicon("java/java-original"),
+  "Golang": devicon("go/go-original"),
+  "Python": devicon("python/python-original"),
+  "C": devicon("c/c-original"),
+  "C++": devicon("cplusplus/cplusplus-original"),
+  "Spring Boot": devicon("spring/spring-original"),
+  "Go kit": devicon("go/go-original"),
+  "Django": devicon("django/django-plain"),
+  "Flask": devicon("flask/flask-original"),
+  "MySQL": devicon("mysql/mysql-original"),
+  "MongoDB": devicon("mongodb/mongodb-original"),
+  "Kafka": devicon("apachekafka/apachekafka-original"),
+  "DynamoDB": devicon("dynamodb/dynamodb-original"),
+  "AWS": devicon("amazonwebservices/amazonwebservices-original-wordmark"),
+  "GCP": devicon("googlecloud/googlecloud-original"),
+  "Docker": devicon("docker/docker-original"),
+  "Kubernetes": devicon("kubernetes/kubernetes-plain"),
+};
+
+const configured = new Set(siteConfig.skills);
+const grouped = skillCategories
+  .map((c) => ({ label: c.label, items: c.items.filter((s) => configured.has(s)) }))
+  .filter((c) => c.items.length > 0);
+const unbucketed = siteConfig.skills.filter(
+  (s) => !skillCategories.some((c) => c.items.includes(s))
+);
+if (unbucketed.length > 0) grouped.push({ label: "Other", items: unbucketed });
 ---
 
-<section id="about" class="p-8 sm:p-12 md:p-16 lg:p-24">
-  <div>
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
-      <div class="lg:col-span-4">
-        <h2
-          class="text-3xl sm:text-4xl md:text-5xl xl:text-7xl font-bold text-gray-900"
-        >
-          About Me
-        </h2>
-        <div
-          class="w-[75px] h-[5px] mt-2 rounded-full"
-          style={`background-color: ${siteConfig.accentColor}`}
-        >
-        </div>
-        
-        {/* Profile Image */}
+<section id="about" class="relative py-24 md:py-32 px-6 sm:px-10 md:px-16 lg:px-24">
+  <div class="mx-auto max-w-7xl">
+    <!-- Section heading -->
+    <div class="reveal mb-14">
+      <p class="text-sm font-mono text-slate-500 tracking-widest uppercase">
+        <span style="color: var(--accent);">01.</span> About me
+      </p>
+      <h2 class="mt-3 text-3xl sm:text-4xl md:text-5xl font-bold section-title" style="font-family: var(--font-display);">
+        A quick intro.
+      </h2>
+      <div class="mt-4 h-[3px] w-20 rounded-full accent-bar"></div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+      <!-- Left: Portrait -->
+      <div class="lg:col-span-4 reveal">
         {siteConfig.profileImage && (
-          <div class="mt-8 lg:mt-12">
-            <img
-              src={siteConfig.profileImage}
-              alt={`${siteConfig.name} - ${siteConfig.title}`}
-              class="w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 rounded-full object-cover shadow-lg"
-              style={`border: 4px solid ${siteConfig.accentColor}20; object-position: center 40%; transform: scale(1.2)`}
-            />
+          <div class="relative mx-auto lg:mx-0 w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80">
+            <!-- Outer glow -->
+            <div
+              class="absolute -inset-3 rounded-full opacity-40 blur-2xl"
+              style="background: conic-gradient(from 120deg, #334155, #475569, #64748b, #334155);"
+            ></div>
+            <!-- Gradient ring -->
+            <div
+              class="relative h-full w-full rounded-full p-[3px]"
+              style="background: linear-gradient(135deg, #0f172a, #475569, #94a3b8);"
+            >
+              <!-- Inner frame with backdrop -->
+              <div
+                class="h-full w-full rounded-full overflow-hidden flex items-center justify-center"
+                style="background: radial-gradient(circle at 50% 30%, rgba(100,116,139,0.14), rgba(236,237,241,1) 75%);"
+              >
+                <!-- Vertical crop: tune `profileImageVerticalAnchorPercent` in src/config.ts (0–100). -->
+                <img
+                  src={siteConfig.profileImage}
+                  alt={`${siteConfig.name} - ${siteConfig.title}`}
+                  class="h-full w-full object-cover scale-160"
+                  style={`object-position: center ${siteConfig.profileImageVerticalAnchorPercent ?? 40}%;`}
+                />
+              </div>
+            </div>
           </div>
         )}
       </div>
 
-      <div class="lg:col-span-8 space-y-8">
-        <p class="text-lg sm:text-xl md:text-2xl leading-relaxed text-gray-600">
-          {siteConfig.aboutMe}
-        </p>
+      <!-- Right: Bio + skills -->
+      <div class="lg:col-span-8 space-y-10 reveal">
+        <div class="about-copy text-sm sm:text-sm md:text-base leading-relaxed text-slate-300 space-y-6">
+          <p>
+            <span class="drop-cap" aria-hidden="true">S</span><span class="sr-only">S</span>oftware Engineer at
+            <strong>NVIDIA</strong>, currently shipping the
+            <strong>billing &amp; payments platform</strong>
+            behind <strong>subscriptions</strong>, <strong>fraud detection</strong>, and
+            <strong>usage-based metering</strong> across NVIDIA's services — <em>at scale</em>.
+          </p>
+          <p>
+            I design <strong>distributed systems</strong> and <strong>AI/ML infrastructure</strong>
+            for the problems that quietly matter: <strong>low-latency payment flows</strong>,
+            <strong>resilient data pipelines</strong>, and <strong>production-grade ML</strong>.
+            Before NVIDIA, I shipped systems at <strong>Amazon Robotics</strong>, <strong>Zeni.ai</strong>,
+            and <strong>Flipkart</strong> — infrastructure behind products used by millions.
+          </p>
+          <div class="flex flex-wrap items-center gap-x-3 gap-y-2 pt-5 mt-2 text-sm font-mono border-t" style="border-color: var(--border);">
+            <span class="inline-flex items-center gap-2">
+              <span class="uppercase tracking-[0.18em] text-[10px]" style="color: var(--text-2);">MS CS</span>
+              <span style="color: var(--text-0);" class="font-semibold">UMass Amherst</span>
+            </span>
+            <span style="color: var(--text-3);">·</span>
+            <span class="inline-flex items-center gap-2">
+              <span class="uppercase tracking-[0.18em] text-[10px]" style="color: var(--text-2);">BTech</span>
+              <span style="color: var(--text-0);" class="font-semibold">IIT Dhanbad</span>
+            </span>
+          </div>
+        </div>
 
-        <div class="pt-4">
-          <div class="flex flex-wrap gap-3">
-            {
-              siteConfig.skills.map((skill) => (
-                <span class="px-3 sm:px-4 py-1.5 sm:py-2 bg-white/70 backdrop-blur-sm text-gray-800 rounded-full text-sm sm:text-base md:text-lg font-medium hover:bg-white/90 transition-colors duration-200 shadow-sm">
-                  {skill}
-                </span>
-              ))
-            }
+        <div>
+          <h3 class="text-sm font-mono uppercase tracking-widest text-slate-400 mb-5">
+            <span style="color: var(--accent);">//</span> Tech Stack
+          </h3>
+          <div class="space-y-5">
+            {grouped.map((cat) => (
+              <div>
+                <div class="text-xs uppercase tracking-[0.2em] text-slate-500 mb-2">{cat.label}</div>
+                <div class="flex flex-wrap gap-2">
+                  {cat.items.map((skill) => (
+                    <span class="inline-flex items-center gap-1.5 rounded-md border border-white/10 bg-white/[0.03] px-2 py-1 text-xs text-slate-200 hover:border-white/20 hover:bg-white/[0.06] transition-colors">
+                      {skillIcons[skill] && (
+                        <img
+                          src={skillIcons[skill]}
+                          alt=""
+                          loading="lazy"
+                          class="h-3.5 w-auto max-w-[18px] object-contain"
+                        />
+                      )}
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <style>
+    :global(.about-copy .drop-cap) {
+      font-family: var(--font-display);
+      font-size: 4.2rem;
+      line-height: 0.82;
+      float: left;
+      margin: 0.15rem 0.6rem -0.1rem 0;
+      color: var(--text-0);
+      background: linear-gradient(135deg, #0f172a 0%, #334155 55%, #64748b 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    :global(.about-copy strong) {
+      font-weight: 700;
+      color: var(--text-0);
+    }
+    :global(.about-copy em) {
+      font-style: italic;
+      color: var(--text-1);
+      font-weight: 500;
+    }
+    :global(.sr-only) {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
 </section>
